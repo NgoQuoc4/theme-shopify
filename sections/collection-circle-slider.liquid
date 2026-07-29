@@ -1,0 +1,269 @@
+{% comment %}
+  Circular Collection Bubble Slider Section - Japandi & Architectural Furniture
+{% endcomment %}
+
+<div class="circle-collections section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  {% if section.settings.heading != blank %}
+    <div class="circle-collections__header text-{{ section.settings.heading_alignment }}">
+      <h2 class="circle-collections__title h2">{{ section.settings.heading | escape }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="circle-collections__slider-wrapper">
+    <button type="button" class="circle-collections__nav-btn circle-collections__nav-btn--prev" aria-label="Previous categories">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="circle-collections__track" id="circle-collections-track-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% liquid
+          assign item_url = block.settings.link
+          if item_url == blank and block.settings.collection != blank
+            assign item_url = block.settings.collection.url
+          endif
+
+          assign item_title = block.settings.title
+          if item_title == blank and block.settings.collection != blank
+            assign item_title = block.settings.collection.title
+          endif
+
+          assign item_image = block.settings.image
+          if item_image == blank and block.settings.collection != blank
+            assign item_image = block.settings.collection.featured_image
+          endif
+        %}
+
+        <a href="{{ item_url | default: '#' }}" class="circle-collections__item{% if block.settings.is_highlight %} circle-collections__item--highlight{% endif %}" {{ block.shopify_attributes }}>
+          <div class="circle-collections__bubble" style="{% if block.settings.bg_color != blank %}background-color: {{ block.settings.bg_color }};{% endif %}">
+            {% if item_image != blank %}
+              {{ item_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'circle-collections__img', alt: item_title }}
+            {% elsif block.settings.is_highlight %}
+              <span class="circle-collections__highlight-text">{{ block.settings.highlight_label | default: 'Sale' }}</span>
+            {% else %}
+              <span class="circle-collections__placeholder-icon">🪑</span>
+            {% endif %}
+          </div>
+          <span class="circle-collections__label">{{ item_title | default: 'Category' }}</span>
+        </a>
+      {% endfor %}
+    </div>
+
+    <button type="button" class="circle-collections__nav-btn circle-collections__nav-btn--next" aria-label="Next categories">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+{% stylesheet %}
+  .circle-collections__slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .circle-collections__track {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    padding-block: 12px;
+    width: 100%;
+  }
+  .circle-collections__track::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+  .circle-collections__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #1C1C1A;
+    flex-shrink: 0;
+    width: 90px;
+    transition: transform 0.25s ease;
+  }
+  .circle-collections__item:hover {
+    transform: translateY(-4px);
+  }
+  .circle-collections__bubble {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border, #E5E0D8);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .circle-collections__item:hover .circle-collections__bubble {
+    border-color: var(--color-accent, #A67C52);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  .circle-collections__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .circle-collections__label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.25;
+    color: #1C1C1A;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .circle-collections__item--highlight .circle-collections__bubble {
+    background-color: #C86446;
+    border-color: #C86446;
+    color: #FFFFFF;
+  }
+  .circle-collections__highlight-text {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .circle-collections__nav-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid var(--color-border, #E5E0D8);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    color: #1C1C1A;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .circle-collections__nav-btn:hover {
+    background-color: #1C1C1A;
+    color: #FFFFFF;
+  }
+{% endstylesheet %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('circle-collections-track-{{ section.id }}');
+    const prevBtn = track?.parentElement.querySelector('.circle-collections__nav-btn--prev');
+    const nextBtn = track?.parentElement.querySelector('.circle-collections__nav-btn--next');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -240, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: 240, behavior: 'smooth' });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Circular Category Slider",
+  "tag": "section",
+  "class": "circle-collections-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop By Category"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_bubble",
+      "name": "Category Bubble",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom Link URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Circle Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection (Fallback)"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_highlight",
+          "label": "Highlight Bubble (Sale Red Badge)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "highlight_label",
+          "label": "Highlight Text Label",
+          "default": "Sale"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Custom Circle Background Color"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Circular Category Slider",
+      "blocks": [
+        { "type": "collection_bubble", "settings": { "title": "Sale Items", "is_highlight": true } },
+        { "type": "collection_bubble", "settings": { "title": "Press Tables" } },
+        { "type": "collection_bubble", "settings": { "title": "Lighting" } },
+        { "type": "collection_bubble", "settings": { "title": "Spoke Sofa" } },
+        { "type": "collection_bubble", "settings": { "title": "Storage" } },
+        { "type": "collection_bubble", "settings": { "title": "Chairs" } },
+        { "type": "collection_bubble", "settings": { "title": "Accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
