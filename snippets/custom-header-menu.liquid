@@ -85,6 +85,17 @@
                   {% endfor %}
                 </div>
               </div>
+            {% elsif matched_block.type == 'mega_menu_category_grid' %}
+              <div class="custom-mega-menu__cat-grid">
+                {% for col in matched_block.settings.featured_collections %}
+                  <a href="{{ col.url }}" class="custom-mega-menu__cat-card">
+                    {% if col.featured_image %}
+                      <img src="{{ col.featured_image | image_url: width: 300 }}" alt="{{ col.title | escape }}" loading="lazy" class="custom-mega-menu__cat-img">
+                    {% endif %}
+                    <span class="custom-mega-menu__cat-title">{{ col.title }} &rarr;</span>
+                  </a>
+                {% endfor %}
+              </div>
             {% endif %}
           </div>
         </div>
@@ -283,6 +294,39 @@
   .custom-mega-menu__product-price {
     font-size: 0.8rem;
     color: var(--color-accent, #A67C52);
+    font-weight: 600;
+  }
+
+  /* Category Card Grid Mega Menu */
+  .custom-mega-menu__cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+  .custom-mega-menu__cat-card {
+    text-decoration: none;
+    color: #1C1C1A;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.2s ease;
+  }
+  .custom-mega-menu__cat-card:hover {
+    transform: translateY(-3px);
+  }
+  .custom-mega-menu__cat-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .custom-mega-menu__cat-title {
+    font-size: 0.85rem;
     font-weight: 600;
   }
 {% endstylesheet %}
