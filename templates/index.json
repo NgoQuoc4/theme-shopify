@@ -65,6 +65,21 @@
       },
       "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8"]
     },
+    "custom_banner_slider_main": {
+      "type": "custom-banner-slider",
+      "settings": {
+        "slides_per_view": 1,
+        "card_radius": 16,
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "slide_1": { "type": "slide", "settings": { "heading": "Dining & Kitchen", "subheading": "Contemporary Grace", "button_label": "Shop Collection" } },
+        "slide_2": { "type": "slide", "settings": { "heading": "Living Room Sanctum", "subheading": "Minimalist Proportions", "button_label": "Explore Living" } }
+      },
+      "block_order": ["slide_1", "slide_2"]
+    },
     "category_bento_main": {
       "type": "category-bento",
       "settings": {
@@ -258,6 +273,7 @@
   "order": [
     "hero_jVaWmY",
     "circle_collections_main",
+    "custom_banner_slider_main",
     "category_bento_main",
     "shoppable_lookbook_main",
     "product_list_fa6P9H",

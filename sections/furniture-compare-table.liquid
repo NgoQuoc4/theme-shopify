@@ -1,0 +1,257 @@
+{% comment %}
+  Furniture Comparison Matrix & Spec Sheet Section - Japandi Theme
+{% endcomment %}
+
+<div 
+  class="compare-matrix section section--{{ section.settings.section_width }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  {% if section.settings.heading != blank %}
+    <div class="compare-matrix__header text-{{ section.settings.heading_alignment }}">
+      {% if section.settings.subheading != blank %}
+        <span class="compare-matrix__subheading">{{ section.settings.subheading | escape }}</span>
+      {% endif %}
+      <h2 class="compare-matrix__title h2">{{ section.settings.heading | escape }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="compare-matrix__table-wrapper">
+    <table class="compare-matrix__table">
+      <thead>
+        <tr>
+          <th class="compare-matrix__th compare-matrix__th--feature">{{ section.settings.feature_column_title | default: 'Specification / Feature' }}</th>
+          {% for block in section.blocks %}
+            {% if block.type == 'column' %}
+              <th class="compare-matrix__th text-center" {{ block.shopify_attributes }}>
+                <div class="compare-matrix__col-header">
+                  {% if block.settings.image != blank %}
+                    {{ block.settings.image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'compare-matrix__col-img', alt: block.settings.title }}
+                  {% endif %}
+                  <span class="compare-matrix__col-title">{{ block.settings.title | escape }}</span>
+                  {% if block.settings.subtitle != blank %}
+                    <span class="compare-matrix__col-subtitle">{{ block.settings.subtitle | escape }}</span>
+                  {% endif %}
+                  {% if block.settings.badge != blank %}
+                    <span class="compare-matrix__col-badge">{{ block.settings.badge | escape }}</span>
+                  {% endif %}
+                </div>
+              </th>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for block in section.blocks %}
+          {% if block.type == 'row' %}
+            <tr {{ block.shopify_attributes }}>
+              <td class="compare-matrix__td compare-matrix__td--feature">
+                <strong>{{ block.settings.feature_name | escape }}</strong>
+              </td>
+              <td class="compare-matrix__td text-center">{{ block.settings.val_1 | escape }}</td>
+              <td class="compare-matrix__td text-center">{{ block.settings.val_2 | escape }}</td>
+              {% if section.blocks.size > 3 %}
+                <td class="compare-matrix__td text-center">{{ block.settings.val_3 | escape }}</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% stylesheet %}
+  .compare-matrix__header {
+    margin-bottom: 32px;
+  }
+  .compare-matrix__subheading {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent, #A67C52);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .compare-matrix__table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--color-border, #E5E0D8);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  }
+  .compare-matrix__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    font-size: 0.9rem;
+  }
+  .compare-matrix__th,
+  .compare-matrix__td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border, #E5E0D8);
+    vertical-align: middle;
+  }
+  .compare-matrix__th {
+    background-color: var(--color-bg-secondary, #F9F7F4);
+    font-weight: 600;
+  }
+  .compare-matrix__th--feature {
+    width: 25%;
+    text-align: left;
+  }
+  .compare-matrix__col-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .compare-matrix__col-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .compare-matrix__col-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1C1C1A;
+  }
+  .compare-matrix__col-subtitle {
+    font-size: 0.78rem;
+    color: #6E6D68;
+  }
+  .compare-matrix__col-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: #C86446;
+    color: #FFFFFF;
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+  }
+  .compare-matrix__td--feature {
+    color: #1C1C1A;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Furniture Comparison",
+  "tag": "section",
+  "class": "compare-matrix-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Solid Oak vs. Veneer Comparison"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "MATERIAL SPECIFICATION"
+    },
+    {
+      "type": "text",
+      "id": "feature_column_title",
+      "label": "Feature Column Header",
+      "default": "Specification"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Container Width",
+      "options": [
+        { "value": "narrow", "label": "Narrow (1000px)" },
+        { "value": "page-width", "label": "Standard Page Width (1200px)" },
+        { "value": "wide", "label": "Wide (1440px)" },
+        { "value": "full-width", "label": "Full Width (100%)" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Comparison Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "FSC Solid Oak"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "100% European Timber"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Header Thumbnail Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (e.g. Best Choice)"
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Specification Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_name",
+          "label": "Feature Name",
+          "default": "Expected Lifespan"
+        },
+        {
+          "type": "text",
+          "id": "val_1",
+          "label": "Column 1 Value",
+          "default": "50+ Years (Refinishable)"
+        },
+        {
+          "type": "text",
+          "id": "val_2",
+          "label": "Column 2 Value",
+          "default": "10–15 Years"
+        },
+        {
+          "type": "text",
+          "id": "val_3",
+          "label": "Column 3 Value",
+          "default": "5–8 Years"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Furniture Comparison",
+      "blocks": [
+        { "type": "column", "settings": { "title": "Solid White Oak", "subtitle": "Premium Hardwood", "badge": "Best Seller" } },
+        { "type": "column", "settings": { "title": "Oak Veneer", "subtitle": "Engineered Core" } },
+        { "type": "row", "settings": { "feature_name": "Lifespan", "val_1": "50+ Years", "val_2": "15 Years" } },
+        { "type": "row", "settings": { "feature_name": "Refinishing", "val_1": "Multiple Times", "val_2": "Light Sanding Only" } },
+        { "type": "row", "settings": { "feature_name": "Eco Standard", "val_1": "FSC® 100% Certified", "val_2": "FSC® Mixed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

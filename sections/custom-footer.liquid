@@ -1,0 +1,289 @@
+{% comment %}
+  Custom Luxury Japandi Architectural Footer Section
+{% endcomment %}
+
+<footer class="japandi-footer section section--{{ section.settings.section_width }}">
+  <div class="japandi-footer__inner">
+    {% comment %} Top Row: Brand Bio + Newsletter + Quick Links {% endcomment %}
+    <div class="japandi-footer__grid">
+      {% comment %} Column 1: Brand & Philosophy {% endcomment %}
+      <div class="japandi-footer__col japandi-footer__col--brand">
+        <h3 class="japandi-footer__brand-title">{{ section.settings.brand_name | default: 'HYPER ARCHITECTURE' }}</h3>
+        <p class="japandi-footer__brand-desc">
+          {{ section.settings.brand_text | default: 'Crafting timeless Japandi & Scandinavian furniture. Sustainable FSC®-certified hardwoods engineered for architectural living.' }}
+        </p>
+        <div class="japandi-footer__socials">
+          <a href="#" aria-label="Instagram" class="japandi-footer__social-link">Instagram</a>
+          <a href="#" aria-label="Pinterest" class="japandi-footer__social-link">Pinterest</a>
+          <a href="#" aria-label="LinkedIn" class="japandi-footer__social-link">LinkedIn</a>
+        </div>
+      </div>
+
+      {% comment %} Column 2: Navigation Menu 1 {% endcomment %}
+      <div class="japandi-footer__col">
+        <h4 class="japandi-footer__col-heading">{{ section.settings.menu_1_heading | default: 'Collections' }}</h4>
+        {% if section.settings.menu_1 != blank %}
+          <ul class="japandi-footer__list">
+            {% for link in section.settings.menu_1.links %}
+              <li><a href="{{ link.url }}" class="japandi-footer__link">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="japandi-footer__list">
+            <li><a href="{{ routes.all_products_collection_url }}" class="japandi-footer__link">Living Room Sanctum</a></li>
+            <li><a href="{{ routes.all_products_collection_url }}" class="japandi-footer__link">Dining & Kitchen</a></li>
+            <li><a href="{{ routes.all_products_collection_url }}" class="japandi-footer__link">Bedroom Furniture</a></li>
+            <li><a href="{{ routes.all_products_collection_url }}" class="japandi-footer__link">Home Office Series</a></li>
+          </ul>
+        {% endif %}
+      </div>
+
+      {% comment %} Column 3: Navigation Menu 2 {% endcomment %}
+      <div class="japandi-footer__col">
+        <h4 class="japandi-footer__col-heading">{{ section.settings.menu_2_heading | default: 'Client Services' }}</h4>
+        {% if section.settings.menu_2 != blank %}
+          <ul class="japandi-footer__list">
+            {% for link in section.settings.menu_2.links %}
+              <li><a href="{{ link.url }}" class="japandi-footer__link">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <ul class="japandi-footer__list">
+            <li><a href="/pages/contact" class="japandi-footer__link">Trade Program & Architects</a></li>
+            <li><a href="/pages/contact" class="japandi-footer__link">White-Glove Delivery</a></li>
+            <li><a href="/pages/contact" class="japandi-footer__link">10-Year Frame Warranty</a></li>
+            <li><a href="/pages/contact" class="japandi-footer__link">Care & Assembly Guides</a></li>
+          </ul>
+        {% endif %}
+      </div>
+
+      {% comment %} Column 4: Newsletter Box {% endcomment %}
+      <div class="japandi-footer__col japandi-footer__col--newsletter">
+        <h4 class="japandi-footer__col-heading">{{ section.settings.newsletter_heading | default: 'The Architectural Journal' }}</h4>
+        <p class="japandi-footer__newsletter-desc">{{ section.settings.newsletter_text | default: 'Receive early preview access to limited series and trade design insights.' }}</p>
+        {% form 'customer', class: 'japandi-footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="japandi-footer__input-group">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              class="japandi-footer__input" 
+              placeholder="Enter your email address" 
+              required
+            >
+            <button type="submit" class="japandi-footer__submit-btn">Join</button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+
+    {% comment %} Bottom Bar: Copyright & Payment Badges {% endcomment %}
+    <div class="japandi-footer__bottom">
+      <p class="japandi-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Engineered with Japandi Precision.
+      </p>
+      <div class="japandi-footer__trust-badges">
+        <span class="japandi-footer__badge">FSC® Certified</span>
+        <span class="japandi-footer__badge">Carbon Neutral Shipping</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .japandi-footer {
+    background-color: #1A1A18;
+    color: #E5E0D8;
+    padding-block: 64px 32px;
+    font-family: var(--font-body-family);
+  }
+  .japandi-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr;
+    gap: 48px;
+    margin-bottom: 56px;
+  }
+  .japandi-footer__brand-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    margin: 0 0 16px 0;
+  }
+  .japandi-footer__brand-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #B5B0A8;
+    margin-bottom: 24px;
+    max-width: 320px;
+  }
+  .japandi-footer__socials {
+    display: flex;
+    gap: 16px;
+  }
+  .japandi-footer__social-link {
+    color: #A67C52;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .japandi-footer__social-link:hover {
+    color: #FFFFFF;
+  }
+  .japandi-footer__col-heading {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0 0 20px 0;
+    letter-spacing: 0.04em;
+  }
+  .japandi-footer__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .japandi-footer__link {
+    color: #B5B0A8;
+    text-decoration: none;
+    font-size: 0.86rem;
+    transition: color 0.2s;
+  }
+  .japandi-footer__link:hover {
+    color: #FFFFFF;
+  }
+  .japandi-footer__newsletter-desc {
+    font-size: 0.86rem;
+    color: #B5B0A8;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .japandi-footer__input-group {
+    display: flex;
+    gap: 8px;
+  }
+  .japandi-footer__input {
+    flex: 1;
+    background: #2A2A28;
+    border: 1px solid #3A3A38;
+    padding: 12px 16px;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-size: 0.86rem;
+    outline: none;
+  }
+  .japandi-footer__input::placeholder {
+    color: #8E8A82;
+  }
+  .japandi-footer__submit-btn {
+    background: #A67C52;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.86rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .japandi-footer__submit-btn:hover {
+    background: #C86446;
+  }
+  .japandi-footer__bottom {
+    border-top: 1px solid #2A2A28;
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: #8E8A82;
+  }
+  .japandi-footer__trust-badges {
+    display: flex;
+    gap: 16px;
+  }
+  .japandi-footer__badge {
+    background: #2A2A28;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    color: #B5B0A8;
+  }
+
+  @media screen and (max-width: 989px) {
+    .japandi-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .japandi-footer__bottom {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Custom Japandi Footer",
+  "tag": "footer",
+  "class": "custom-footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Title",
+      "default": "HYPER ARCHITECTURE"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand Bio",
+      "default": "Crafting timeless Japandi & Scandinavian furniture. Sustainable FSC®-certified hardwoods engineered for architectural living."
+    },
+    {
+      "type": "text",
+      "id": "menu_1_heading",
+      "label": "Menu 1 Title",
+      "default": "Collections"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Select Menu 1"
+    },
+    {
+      "type": "text",
+      "id": "menu_2_heading",
+      "label": "Menu 2 Title",
+      "default": "Client Services"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Select Menu 2"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Container Width",
+      "options": [
+        { "value": "narrow", "label": "Narrow (1000px)" },
+        { "value": "page-width", "label": "Standard Page Width (1200px)" },
+        { "value": "wide", "label": "Wide (1440px)" },
+        { "value": "full-width", "label": "Full Width (100%)" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Japandi Footer"
+    }
+  ]
+}
+{% endschema %}
