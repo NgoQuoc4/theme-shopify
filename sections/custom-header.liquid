@@ -1,160 +1,292 @@
 {% comment %}
-  Custom Japandi Furniture Header Section - Multiple Layouts & Advanced Mega Menus
+  Hyper Architectural 2-Tier Header Section - Japandi & Furniture Theme
 {% endcomment %}
 
 {% comment %} theme-check-disable ValidScopedCSSClass {% endcomment %}
 <script type="module" src="{{ 'custom-header.js' | asset_url }}" fetchpriority="low"></script>
 
 {% liquid
-  assign header_layout = section.settings.layout
   assign is_transparent = section.settings.enable_transparent
 %}
 
 <div 
-  class="furniture-header furniture-header--{{ header_layout }}{% if is_transparent and template.name == 'index' %} furniture-header--transparent{% endif %}{% if section.settings.enable_sticky %} furniture-header--sticky{% endif %}"
+  class="furniture-header hyper-header{% if is_transparent and template.name == 'index' %} furniture-header--transparent{% endif %}{% if section.settings.enable_sticky %} furniture-header--sticky{% endif %}"
   id="furniture-header-{{ section.id }}"
 >
-  <div class="furniture-header__announcement section-background color-custom-drawer">
-    {% if section.settings.announcement_text != blank %}
+  {% if section.settings.announcement_text != blank %}
+    <div class="furniture-header__announcement section-background color-custom-drawer">
       <div class="furniture-header__announcement-inner page-width text-center">
         <span>{{ section.settings.announcement_text }}</span>
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 
-  <header class="furniture-header__main page-width">
-    {% comment %} Left Navigation or Logo depending on layout {% endcomment %}
-    {% if header_layout == 'logo_center' %}
-      <nav class="furniture-header__nav furniture-header__nav--split-left">
-        {% render 'custom-header-menu', menu: section.settings.menu_left, blocks: section.blocks %}
-      </nav>
-    {% endif %}
-
-    <div class="furniture-header__logo-wrapper">
-      <a href="{{ routes.root_url }}" class="furniture-header__logo-link">
+  {% comment %} Tier 1: Main Header Bar (Logo, Search Pill, Account & Store Links, Cart Circle) {% endcomment %}
+  <div class="hyper-header__top page-width">
+    <div class="hyper-header__logo-wrapper">
+      <a href="{{ routes.root_url }}" class="hyper-header__logo-link">
         {% if section.settings.logo != blank %}
-          {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'eager', class: 'furniture-header__logo-img', alt: shop.name }}
+          {{ section.settings.logo | image_url: width: 400 | image_tag: loading: 'eager', class: 'hyper-header__logo-img', alt: shop.name }}
         {% else %}
-          <span class="furniture-header__logo-text">{{ shop.name }}</span>
+          <span class="hyper-header__logo-text">{{ shop.name | default: 'HYPER' }}</span>
         {% endif %}
       </a>
     </div>
 
-    {% if header_layout == 'logo_left' or header_layout == 'transparent_overlay' %}
-      <nav class="furniture-header__nav furniture-header__nav--center">
-        {% render 'custom-header-menu', menu: section.settings.menu, blocks: section.blocks %}
-      </nav>
-    {% elsif header_layout == 'logo_center' %}
-      <nav class="furniture-header__nav furniture-header__nav--split-right">
-        {% render 'custom-header-menu', menu: section.settings.menu_right, blocks: section.blocks %}
-      </nav>
-    {% endif %}
+    <div class="hyper-header__search-wrapper">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="hyper-header__search-form">
+        <div class="hyper-header__category-select">
+          <select name="category" aria-label="Select Category">
+            <option value="">All Categories</option>
+            <option value="living-room">Living Room</option>
+            <option value="dining-room">Dining Room</option>
+            <option value="bedroom">Bedroom</option>
+            <option value="office">Office & Desks</option>
+          </select>
+          <span class="hyper-header__select-arrow">&darr;</span>
+        </div>
+        <div class="hyper-header__search-divider"></div>
+        <input 
+          type="search" 
+          name="q" 
+          placeholder="{{ section.settings.search_placeholder | default: 'What are you looking for?' }}" 
+          aria-label="Search"
+          class="hyper-header__search-input"
+        >
+        <button type="submit" class="hyper-header__search-btn" aria-label="Submit Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+    </div>
 
-    <div class="furniture-header__actions">
-      <a href="{{ routes.search_url }}" class="furniture-header__action-btn" aria-label="Search">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </a>
+    <div class="hyper-header__actions">
+      {% if section.settings.show_find_store %}
+        <a href="{{ section.settings.store_locator_url | default: '/pages/contact' }}" class="hyper-header__action-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Find a store</span>
+        </a>
+      {% endif %}
 
-      <a href="{{ routes.account_url }}" class="furniture-header__action-btn" aria-label="Account">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <a href="{{ routes.account_url }}" class="hyper-header__action-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
           <circle cx="12" cy="7" r="4"/>
         </svg>
+        <span>Sign in / Register</span>
       </a>
 
-      <a href="{{ routes.cart_url }}" class="furniture-header__action-btn furniture-header__cart-btn" id="cart-icon-bubble" aria-label="Cart">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <a href="{{ routes.cart_url }}" class="hyper-header__cart-circle" id="cart-icon-bubble" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
           <line x1="3" y1="6" x2="21" y2="6"/>
           <path d="M16 10a4 4 0 0 1-8 0"/>
         </svg>
         {% if cart.item_count > 0 %}
-          <span class="furniture-header__cart-count">{{ cart.item_count }}</span>
+          <span class="hyper-header__cart-badge">{{ cart.item_count }}</span>
         {% endif %}
       </a>
     </div>
-  </header>
+  </div>
+
+  {% comment %} Tier 2: Bottom Navigation Bar {% endcomment %}
+  <div class="hyper-header__bottom-bar">
+    <div class="page-width">
+      <nav class="hyper-header__nav">
+        {% render 'custom-header-menu', menu: section.settings.menu, blocks: section.blocks %}
+      </nav>
+    </div>
+  </div>
 </div>
 
 {% stylesheet %}
-  .furniture-header {
-    background-color: var(--color-bg-primary, #FBF9F5);
+  .hyper-header {
+    background-color: #FFFFFF;
     border-bottom: 1px solid var(--color-border, #E5E0D8);
     position: relative;
     z-index: 50;
-  }
-  .furniture-header--transparent {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: transparent;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    color: #FFFFFF;
   }
   .furniture-header--sticky {
     position: sticky;
     top: 0;
     backdrop-filter: blur(12px);
-    background-color: rgba(251, 249, 245, 0.92);
+    background-color: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
   }
   .furniture-header__announcement {
     padding-block: 8px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     background-color: var(--color-bg-secondary, #F3EFEA);
     border-bottom: 1px solid var(--color-border, #E5E0D8);
   }
-  .furniture-header__main {
+
+  /* Tier 1 Layout */
+  .hyper-header__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-block: 16px;
-  }
-  .furniture-header__logo-text {
-    font-family: var(--font-heading-family);
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: #1C1C1A;
-    text-decoration: none;
-  }
-  .furniture-header__nav {
-    display: flex;
-    align-items: center;
     gap: 32px;
   }
-  .furniture-header__actions {
+  .hyper-header__logo-text {
+    font-family: var(--font-heading-family);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #1C1C1A;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .hyper-header__logo-img {
+    max-height: 40px;
+    width: auto;
+  }
+
+  /* Search Pill Bar */
+  .hyper-header__search-wrapper {
+    flex: 1;
+    max-width: 580px;
+  }
+  .hyper-header__search-form {
     display: flex;
     align-items: center;
-    gap: 16px;
+    background-color: #EEEEEE;
+    border-radius: 999px;
+    padding: 6px 16px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
   }
-  .furniture-header__action-btn {
+  .hyper-header__search-form:focus-within {
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 2px var(--color-accent, #A67C52);
+  }
+  .hyper-header__category-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .hyper-header__category-select select {
+    background: transparent;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: #1C1C1A;
-    display: inline-flex;
+    padding-right: 18px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+  }
+  .hyper-header__select-arrow {
+    position: absolute;
+    right: 0;
+    font-size: 0.7rem;
+    pointer-events: none;
+    color: #6E6D68;
+  }
+  .hyper-header__search-divider {
+    width: 1px;
+    height: 18px;
+    background-color: #CCCCCC;
+    margin-inline: 12px;
+  }
+  .hyper-header__search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 0.88rem;
+    color: #1C1C1A;
+    outline: none;
+  }
+  .hyper-header__search-input::placeholder {
+    color: #888888;
+  }
+  .hyper-header__search-btn {
+    background: transparent;
+    border: none;
+    color: #1C1C1A;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Right Actions */
+  .hyper-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .hyper-header__action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: #1C1C1A;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .hyper-header__action-link:hover {
+    color: var(--color-accent, #A67C52);
+  }
+  .hyper-header__cart-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #EEEEEE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1C1C1A;
     text-decoration: none;
     position: relative;
+    transition: background-color 0.2s ease, transform 0.2s ease;
   }
-  .furniture-header__cart-count {
+  .hyper-header__cart-circle:hover {
+    background-color: #1C1C1A;
+    color: #FFFFFF;
+    transform: scale(1.05);
+  }
+  .hyper-header__cart-badge {
     position: absolute;
-    top: -6px;
-    right: -8px;
+    top: -4px;
+    right: -4px;
     background: var(--color-accent, #A67C52);
     color: #FFFFFF;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 700;
     width: 18px;
     height: 18px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Tier 2 Bottom Bar */
+  .hyper-header__bottom-bar {
+    border-top: 1px solid #F0ECE6;
+    padding-block: 10px;
+  }
+  .hyper-header__nav {
+    display: flex;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 989px) {
+    .hyper-header__search-wrapper {
+      display: none;
+    }
+    .hyper-header__action-link span {
+      display: none;
+    }
   }
 {% endstylesheet %}
 
@@ -165,27 +297,27 @@
   "class": "furniture-header-section",
   "settings": [
     {
-      "type": "select",
-      "id": "layout",
-      "label": "Header Layout Style",
-      "options": [
-        { "value": "logo_left", "label": "Logo Left, Centered Menu" },
-        { "value": "logo_center", "label": "Centered Logo, Split Menu" },
-        { "value": "transparent_overlay", "label": "Transparent Overlay (Homepage)" }
-      ],
-      "default": "logo_left"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_transparent",
-      "label": "Enable Transparent Overlay on Homepage",
-      "default": true
-    },
-    {
       "type": "checkbox",
       "id": "enable_sticky",
       "label": "Sticky Header on Scroll",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_find_store",
+      "label": "Show 'Find a store' link",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "store_locator_url",
+      "label": "'Find a store' Link URL"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search Input Placeholder",
+      "default": "What are you looking for?"
     },
     {
       "type": "text",
@@ -203,16 +335,6 @@
       "id": "menu",
       "label": "Main Navigation Menu",
       "default": "main-menu"
-    },
-    {
-      "type": "link_list",
-      "id": "menu_left",
-      "label": "Split Menu Left (For Centered Logo Layout)"
-    },
-    {
-      "type": "link_list",
-      "id": "menu_right",
-      "label": "Split Menu Right (For Centered Logo Layout)"
     }
   ],
   "blocks": [
@@ -224,7 +346,7 @@
           "type": "text",
           "id": "parent_menu_title",
           "label": "Parent Menu Item Handle",
-          "info": "Tên menu cha (Ví dụ: 'Living Room' hoặc 'Collections')"
+          "info": "Tên menu cha (Ví dụ: 'Shop By Room' hoặc 'Tables & Desks')"
         },
         {
           "type": "image_picker",
@@ -235,28 +357,12 @@
           "type": "text",
           "id": "promo_heading_1",
           "label": "Promo 1 Title",
-          "default": "New Japandi Sofa Series"
+          "default": "New Japandi Dining Series"
         },
         {
           "type": "url",
           "id": "promo_link_1",
           "label": "Promo 1 Link"
-        },
-        {
-          "type": "image_picker",
-          "id": "promo_image_2",
-          "label": "Promo Card Image 2"
-        },
-        {
-          "type": "text",
-          "id": "promo_heading_2",
-          "label": "Promo 2 Title",
-          "default": "Artisan Dining Sets"
-        },
-        {
-          "type": "url",
-          "id": "promo_link_2",
-          "label": "Promo 2 Link"
         }
       ]
     },
@@ -268,39 +374,12 @@
           "type": "text",
           "id": "parent_menu_title",
           "label": "Parent Menu Item Handle",
-          "info": "Tên menu cha (Ví dụ: 'Furniture')"
+          "info": "Tên menu cha (Ví dụ: 'Chairs & Stools')"
         },
         {
           "type": "collection",
           "id": "featured_collection",
           "label": "Featured Collection Products"
-        }
-      ]
-    },
-    {
-      "type": "mega_menu_tabs",
-      "name": "Mega Menu Room Tabs",
-      "settings": [
-        {
-          "type": "text",
-          "id": "parent_menu_title",
-          "label": "Parent Menu Item Handle",
-          "info": "Tên menu cha (Ví dụ: 'Rooms')"
-        },
-        {
-          "type": "image_picker",
-          "id": "room_image_living",
-          "label": "Living Room Image"
-        },
-        {
-          "type": "image_picker",
-          "id": "room_image_dining",
-          "label": "Dining Room Image"
-        },
-        {
-          "type": "image_picker",
-          "id": "room_image_bedroom",
-          "label": "Bedroom Image"
         }
       ]
     }
@@ -309,8 +388,8 @@
     {
       "name": "Custom Header & Mega Menu",
       "blocks": [
-        { "type": "mega_menu_promo", "settings": { "parent_menu_title": "Collections" } },
-        { "type": "mega_menu_products", "settings": { "parent_menu_title": "Furniture" } }
+        { "type": "mega_menu_promo", "settings": { "parent_menu_title": "Shop By Room" } },
+        { "type": "mega_menu_products", "settings": { "parent_menu_title": "Tables & Desks" } }
       ]
     }
   ]
