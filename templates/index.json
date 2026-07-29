@@ -8,31 +8,12 @@
           "name": "t:names.heading",
           "settings": {
             "text": "<p>Japandi & Scandinavian Furniture Series</p>",
-            "text_color": "{{ settings.color_palette.background }}",
-        "heading_JndF9m": {
-          "type": "heading",
-          "settings": {
-            "heading": "Modern Japandi Furniture & Architectural Living",
-            "heading_preset": "h1",
-            "open_in_new_tab": false,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-            "custom_button_background": "rgba(0,0,0,0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "text_color": "{{ settings.color_palette.background }}"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "text_YLPk4p"
       ],
       "name": "t:names.hero",
       "settings": {
@@ -64,6 +45,25 @@
         "padding-block-start": 100,
         "padding-block-end": 72
       }
+    },
+    "circle_collections_main": {
+      "type": "collection-circle-slider",
+      "settings": {
+        "heading": "Explore Categories",
+        "heading_alignment": "left",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "b1": { "type": "collection_bubble", "settings": { "title": "Sale Items", "is_highlight": true } },
+        "b2": { "type": "collection_bubble", "settings": { "title": "Press Tables" } },
+        "b3": { "type": "collection_bubble", "settings": { "title": "Lighting" } },
+        "b4": { "type": "collection_bubble", "settings": { "title": "Spoke Sofa" } },
+        "b5": { "type": "collection_bubble", "settings": { "title": "Storage" } },
+        "b6": { "type": "collection_bubble", "settings": { "title": "Turn Chairs" } },
+        "b7": { "type": "collection_bubble", "settings": { "title": "Accessories" } },
+        "b8": { "type": "collection_bubble", "settings": { "title": "Tables" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8"]
     },
     "category_bento_main": {
       "type": "category-bento",
