@@ -1,0 +1,291 @@
+{
+  "sections": {
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Japandi & Scandinavian Furniture Series</p>",
+            "text_color": "{{ settings.color_palette.background }}",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Explore Collection",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "rgba(0,0,0,0)",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_YLPk4p",
+        "button_H9gpTf"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "background_color": "rgba(0,0,0,0)",
+        "toggle_overlay": true,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
+    "category_bento_main": {
+      "type": "category-bento",
+      "settings": {
+        "heading": "Explore By Living Space",
+        "subheading": "CURATED CATEGORIES",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "category_card",
+          "settings": {
+            "title": "Living Room Series",
+            "card_size": "large"
+          }
+        },
+        "card_2": {
+          "type": "category_card",
+          "settings": {
+            "title": "Dining Room & Tables",
+            "card_size": "wide"
+          }
+        },
+        "card_3": {
+          "type": "category_card",
+          "settings": {
+            "title": "Bedroom Sanctuary",
+            "card_size": "standard"
+          }
+        },
+        "card_4": {
+          "type": "category_card",
+          "settings": {
+            "title": "Architectural Lighting",
+            "card_size": "standard"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3", "card_4"]
+    },
+    "shoppable_lookbook_main": {
+      "type": "shoppable-lookbook",
+      "settings": {
+        "heading": "Shop The Living Space",
+        "subheading": "INTERIOR LOOKBOOK",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "pin_1": {
+          "type": "hotspot",
+          "settings": {
+            "pos_x": 35,
+            "pos_y": 45
+          }
+        },
+        "pin_2": {
+          "type": "hotspot",
+          "settings": {
+            "pos_x": 65,
+            "pos_y": 60
+          }
+        }
+      },
+      "block_order": ["pin_1", "pin_2"]
+    },
+    "room_bundle_main": {
+      "type": "room-bundle-builder",
+      "settings": {
+        "heading": "Complete The Dining Set",
+        "subheading": "CURATED ROOM SET",
+        "discount_percent": 10,
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "item_1": { "type": "bundle_item", "settings": {} },
+        "item_2": { "type": "bundle_item", "settings": {} }
+      },
+      "block_order": ["item_1", "item_2"]
+    },
+    "material_story_main": {
+      "type": "material-story",
+      "settings": {
+        "heading": "Sustainable Solid Wood & Artistry",
+        "subheading": "JAPANDI CRAFTSMANSHIP",
+        "description": "<p>Every furniture piece is hand-finished by master artisans using FSC®-certified European Solid Oak and Walnut wood.</p>",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "feat_1": { "type": "feature", "settings": { "title": "FSC® Solid Oak", "text": "Sustainably harvested from protected forests." } },
+        "feat_2": { "type": "feature", "settings": { "title": "Textured Bouclé", "text": "Martindale rating over 40,000 rubs for durability." } }
+      },
+      "block_order": ["feat_1", "feat_2"]
+    },
+    "interactive_finish_picker_main": {
+      "type": "interactive-finish-picker",
+      "settings": {
+        "heading": "Explore Our Timber & Fabric Library",
+        "subheading": "TACTILE MATERIAL SELECTION",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "swatch_1": { "type": "finish_card", "settings": { "title": "European Natural Oak", "category": "Solid Wood Finish" } },
+        "swatch_2": { "type": "finish_card", "settings": { "title": "Smoked Walnut", "category": "Solid Wood Finish" } },
+        "swatch_3": { "type": "finish_card", "settings": { "title": "Textured Cream Bouclé", "category": "Upholstery Fabric" } },
+        "swatch_4": { "type": "finish_card", "settings": { "title": "Terracotta Linen", "category": "Upholstery Fabric" } }
+      },
+      "block_order": ["swatch_1", "swatch_2", "swatch_3", "swatch_4"]
+    },
+    "furniture_guarantee_main": {
+      "type": "furniture-guarantee",
+      "settings": {
+        "section_width": "page-width"
+      }
+    },
+    "before_after_main": {
+      "type": "before-after-slider",
+      "settings": {
+        "heading": "Raw Wood vs Artisan Oil Finish",
+        "subheading": "MATERIAL TRANSFORMATION",
+        "heading_alignment": "center",
+        "label_before": "Raw Timber",
+        "label_after": "Organic Oiled Finish",
+        "section_width": "page-width"
+      }
+    },
+    "designer_testimonials_main": {
+      "type": "designer-testimonials",
+      "settings": {
+        "heading": "Endorsed By Leading Architects",
+        "subheading": "PROFESSIONAL REVIEWS",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "rev_1": { "type": "review", "settings": { "author_name": "Elena Lindqvist", "author_title": "Lead Architect, Studio Nord", "quote": "The organic wood finishes and minimal proportions fit perfectly in our Scandinavian villa projects." } },
+        "rev_2": { "type": "review", "settings": { "author_name": "Kenji Sato", "author_title": "Interior Designer, Tokyo Form", "quote": "Exceptional craftsmanship and tactile fabrics that elevated our luxury residential staging." } }
+      },
+      "block_order": ["rev_1", "rev_2"]
+    },
+    "instagram_grid_main": {
+      "type": "instagram-grid",
+      "settings": {
+        "heading": "Follow Us @JapandiHome",
+        "subheading": "INTERIOR INSPIRATION",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      },
+      "blocks": {
+        "p1": { "type": "social_post", "settings": { "handle": "@japandihome" } },
+        "p2": { "type": "social_post", "settings": { "handle": "@japandihome" } },
+        "p3": { "type": "social_post", "settings": { "handle": "@japandihome" } },
+        "p4": { "type": "social_post", "settings": { "handle": "@japandihome" } },
+        "p5": { "type": "social_post", "settings": { "handle": "@japandihome" } }
+      },
+      "block_order": ["p1", "p2", "p3", "p4", "p5"]
+    },
+    "recently_viewed_main": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently Viewed Pieces",
+        "subheading": "YOUR BROWSING HISTORY",
+        "max_products": 4,
+        "section_width": "page-width"
+      }
+    },
+    "newsletter_journal_main": {
+      "type": "newsletter-journal",
+      "settings": {
+        "heading": "Join The Interior Journal",
+        "subheading": "EXCLUSIVE ACCESS & 10% OFF",
+        "section_width": "page-width"
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "section_width": "page-width"
+      }
+    }
+  },
+  "order": [
+    "hero_jVaWmY",
+    "category_bento_main",
+    "shoppable_lookbook_main",
+    "product_list_fa6P9H",
+    "room_bundle_main",
+    "material_story_main",
+    "interactive_finish_picker_main",
+    "furniture_guarantee_main",
+    "before_after_main",
+    "designer_testimonials_main",
+    "instagram_grid_main",
+    "recently_viewed_main",
+    "newsletter_journal_main"
+  ]
+}

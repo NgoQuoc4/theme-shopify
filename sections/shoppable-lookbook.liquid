@@ -1,0 +1,288 @@
+{% comment %}
+  Shoppable Lookbook Section - Japandi & Scandinavian Furniture Edition
+  Allows store owners to pin dynamic hotspots over high-res interior room images.
+{% endcomment %}
+
+<div class="shoppable-lookbook section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="shoppable-lookbook__header text-{{ section.settings.heading_alignment }}">
+    {% if section.settings.subheading != blank %}
+      <span class="shoppable-lookbook__subheading caption-text">{{ section.settings.subheading | escape }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="shoppable-lookbook__title h2">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="shoppable-lookbook__container">
+    <div class="shoppable-lookbook__image-wrapper">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'shoppable-lookbook__image', alt: section.settings.heading }}
+      {% else %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'shoppable-lookbook__image shoppable-lookbook__placeholder' }}
+      {% endif %}
+
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+        {% if product != blank %}
+          <div 
+            class="shoppable-hotspot" 
+            style="top: {{ block.settings.pos_y }}%; left: {{ block.settings.pos_x }}%;"
+            {{ block.shopify_attributes }}
+          >
+            <button type="button" class="shoppable-hotspot__button" aria-label="View {{ product.title | escape }}">
+              <span class="shoppable-hotspot__dot"></span>
+              <span class="shoppable-hotspot__pulse"></span>
+            </button>
+
+            <div class="shoppable-hotspot__popover popover--{{ block.settings.tooltip_position }}">
+              <a href="{{ product.url }}" class="shoppable-hotspot__product-link">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" class="shoppable-hotspot__thumb" loading="lazy" width="80" height="80">
+                {% endif %}
+                <div class="shoppable-hotspot__info">
+                  <h4 class="shoppable-hotspot__title">{{ product.title }}</h4>
+                  <div class="shoppable-hotspot__price">
+                    {{ product.price | money }}
+                    {% if product.compare_at_price > product.price %}
+                      <s class="shoppable-hotspot__compare-price">{{ product.compare_at_price | money }}</s>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .shoppable-lookbook__header {
+    margin-bottom: 2rem;
+  }
+  .shoppable-lookbook__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent, #A67C52);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .shoppable-lookbook__container {
+    position: relative;
+    border-radius: var(--card-corner-radius, 8px);
+    overflow: hidden;
+  }
+  .shoppable-lookbook__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+  }
+  @media screen and (max-width: 749px) {
+    .shoppable-lookbook__image-wrapper {
+      aspect-ratio: 4 / 5;
+    }
+  }
+  .shoppable-lookbook__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .shoppable-hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  .shoppable-hotspot__button {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+  }
+  .shoppable-hotspot__button:hover {
+    transform: scale(1.15);
+  }
+  .shoppable-hotspot__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-accent, #A67C52);
+  }
+  .shoppable-hotspot__pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent, #A67C52);
+    animation: hotspotPulse 2s infinite;
+  }
+  @keyframes hotspotPulse {
+    0% { transform: scale(0.6); opacity: 1; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+
+  .shoppable-hotspot__popover {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 10px;
+    width: 220px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .shoppable-hotspot:hover .shoppable-hotspot__popover,
+  .shoppable-hotspot:focus-within .shoppable-hotspot__popover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+  .shoppable-hotspot__product-link {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .shoppable-hotspot__thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .shoppable-hotspot__title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    line-height: 1.2;
+    color: #1C1C1A;
+  }
+  .shoppable-hotspot__price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent, #A67C52);
+  }
+  .shoppable-hotspot__compare-price {
+    color: #6E6D68;
+    font-weight: 400;
+    margin-left: 6px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shoppable Lookbook",
+  "tag": "section",
+  "class": "shoppable-lookbook-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Shop The Living Space"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "INTERIOR LOOKBOOK"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lookbook Room Image"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product Hotspot Pin",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Furniture Product"
+        },
+        {
+          "type": "range",
+          "id": "pos_x",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Horizontal Position (X)",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "pos_y",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%",
+          "label": "Vertical Position (Y)",
+          "default": 50
+        },
+        {
+          "type": "select",
+          "id": "tooltip_position",
+          "label": "Tooltip Position",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "top"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shoppable Lookbook",
+      "blocks": [
+        { "type": "hotspot", "settings": { "pos_x": 35, "pos_y": 45 } },
+        { "type": "hotspot", "settings": { "pos_x": 65, "pos_y": 60 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

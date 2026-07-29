@@ -1,0 +1,83 @@
+{% comment %}
+  Furniture Product Specifications & Dimensions Sheet Snippet
+  Rendered on Product Detail Page (PDP)
+{% endcomment %}
+
+<div class="furniture-spec-sheet">
+  <h3 class="furniture-spec-sheet__title h4">Specifications & Dimensions</h3>
+  
+  <div class="furniture-spec-sheet__grid">
+    <div class="furniture-spec-sheet__col">
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Dimensions (W × D × H)</span>
+        <span class="furniture-spec-sheet__value">{{ product.metafields.custom.dimensions | default: "210 cm × 95 cm × 78 cm" }}</span>
+      </div>
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Seat Height / Depth</span>
+        <span class="furniture-spec-sheet__value">{{ product.metafields.custom.seat_height | default: "44 cm / 62 cm" }}</span>
+      </div>
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Weight & Load Capacity</span>
+        <span class="furniture-spec-sheet__value">{{ product.metafields.custom.weight_capacity | default: "48 kg (Max load: 300 kg)" }}</span>
+      </div>
+    </div>
+
+    <div class="furniture-spec-sheet__col">
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Frame & Material</span>
+        <span class="furniture-spec-sheet__value">{{ product.metafields.custom.material | default: "FSC®-certified Solid Oak Wood & High-Density Foam" }}</span>
+      </div>
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Upholstery Fabric</span>
+        <span class="furniture-spec-sheet__value">{{ product.metafields.custom.upholstery | default: "Premium Textured Bouclé (Martindale > 40,000 rubs)" }}</span>
+      </div>
+      <div class="furniture-spec-sheet__spec-item">
+        <span class="furniture-spec-sheet__label">Assembly Time</span>
+        <span class="furniture-spec-sheet__value">Approx. 15 mins (Tools included)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .furniture-spec-sheet {
+    margin-block: 24px;
+    padding: 20px;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    border-radius: 8px;
+    border: 1px solid var(--color-border, #E5E0D8);
+  }
+  .furniture-spec-sheet__title {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-family: var(--font-heading-family);
+    color: #1C1C1A;
+  }
+  .furniture-spec-sheet__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .furniture-spec-sheet__spec-item {
+    display: flex;
+    flex-direction: column;
+    padding-block: 8px;
+    border-bottom: 1px solid var(--color-border, #E5E0D8);
+  }
+  .furniture-spec-sheet__spec-item:last-child {
+    border-bottom: none;
+  }
+  .furniture-spec-sheet__label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted, #6E6D68);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .furniture-spec-sheet__value {
+    font-size: 0.9rem;
+    color: #1C1C1A;
+    font-weight: 500;
+  }
+{% endstylesheet %}

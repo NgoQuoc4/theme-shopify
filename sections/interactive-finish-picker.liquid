@@ -1,0 +1,209 @@
+{% comment %}
+  Interactive Wood & Fabric Finish Picker Section - Japandi & Architectural Furniture
+{% endcomment %}
+
+<div class="finish-picker section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="finish-picker__header text-center">
+    {% if section.settings.subheading != blank %}
+      <span class="finish-picker__subheading caption-text">{{ section.settings.subheading | escape }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="finish-picker__title h2">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <p class="finish-picker__desc">{{ section.settings.text | escape }}</p>
+    {% endif %}
+  </div>
+
+  <div class="finish-picker__grid">
+    {% for block in section.blocks %}
+      <div class="finish-picker__card" {{ block.shopify_attributes }}>
+        <div class="finish-picker__swatch-image">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'finish-picker__img', alt: block.settings.title }}
+          {% else %}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'finish-picker__img' }}
+          {% endif %}
+        </div>
+        <div class="finish-picker__card-body">
+          <span class="finish-picker__category">{{ block.settings.category | default: "Solid Timber Finish" }}</span>
+          <h3 class="finish-picker__card-title">{{ block.settings.title }}</h3>
+          <p class="finish-picker__card-desc">{{ block.settings.description }}</p>
+          {% if block.settings.collection != blank %}
+            <a href="{{ block.settings.collection.url }}" class="finish-picker__link">View {{ block.settings.title }} Products &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .finish-picker__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent, #A67C52);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .finish-picker__title {
+    font-family: var(--font-heading-family);
+    color: #1C1C1A;
+    margin-bottom: 0.5rem;
+  }
+  .finish-picker__desc {
+    color: #6E6D68;
+    max-width: 600px;
+    margin: 0 auto 2.5rem auto;
+  }
+  .finish-picker__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .finish-picker__card {
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    border-radius: var(--card-corner-radius, 8px);
+    overflow: hidden;
+    border: 1px solid var(--color-border, #E5E0D8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .finish-picker__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  }
+  .finish-picker__swatch-image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .finish-picker__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .finish-picker__card:hover .finish-picker__img {
+    transform: scale(1.05);
+  }
+  .finish-picker__card-body {
+    padding: 20px;
+  }
+  .finish-picker__category {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent, #A67C52);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .finish-picker__card-title {
+    font-family: var(--font-heading-family);
+    font-size: 1.15rem;
+    margin: 0 0 8px 0;
+    color: #1C1C1A;
+  }
+  .finish-picker__card-desc {
+    font-size: 0.85rem;
+    color: #6E6D68;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .finish-picker__link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1C1C1A;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .finish-picker__link:hover {
+    color: var(--color-accent, #A67C52);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Material & Finish Picker",
+  "tag": "section",
+  "class": "finish-picker-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Explore Our Timber & Fabric Library"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "TACTILE MATERIAL SELECTION"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Description",
+      "default": "From FSC® Natural Oak to textured Bouclé and Italian Saddle Leather, discover the tactile materials that define our Japandi collection."
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "finish_card",
+      "name": "Finish Swatch",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category Label",
+          "default": "Solid Timber Finish"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Finish Name",
+          "default": "European Natural Oak"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Finished with organic matte oil to preserve raw grain texture."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Texture Swatch Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Link Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Material & Finish Picker",
+      "blocks": [
+        { "type": "finish_card", "settings": { "title": "European Natural Oak", "category": "Solid Wood Finish" } },
+        { "type": "finish_card", "settings": { "title": "Smoked Walnut", "category": "Solid Wood Finish" } },
+        { "type": "finish_card", "settings": { "title": "Textured Cream Bouclé", "category": "Upholstery Fabric" } },
+        { "type": "finish_card", "settings": { "title": "Terracotta Linen", "category": "Upholstery Fabric" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

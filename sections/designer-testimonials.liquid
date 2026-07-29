@@ -1,0 +1,201 @@
+{% comment %}
+  Interior Designer & Architect Testimonials Section - Japandi Furniture
+{% endcomment %}
+
+<div class="designer-reviews section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="designer-reviews__header text-{{ section.settings.heading_alignment }}">
+    {% if section.settings.subheading != blank %}
+      <span class="designer-reviews__subheading caption-text">{{ section.settings.subheading | escape }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="designer-reviews__title h2">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="designer-reviews__grid">
+    {% for block in section.blocks %}
+      <div class="designer-reviews__card" {{ block.shopify_attributes }}>
+        <div class="designer-reviews__stars">
+          ★★★★★
+        </div>
+        <blockquote class="designer-reviews__quote">
+          "{{ block.settings.quote | escape }}"
+        </blockquote>
+
+        <div class="designer-reviews__author">
+          {% if block.settings.avatar != blank %}
+            {{ block.settings.avatar | image_url: width: 100 | image_tag: loading: 'lazy', class: 'designer-reviews__avatar', alt: block.settings.author_name }}
+          {% endif %}
+          <div class="designer-reviews__author-meta">
+            <strong class="designer-reviews__name">{{ block.settings.author_name | escape }}</strong>
+            <span class="designer-reviews__title">{{ block.settings.author_title | escape }}</span>
+          </div>
+        </div>
+
+        {% if block.settings.product != blank %}
+          {% assign reviewed_product = block.settings.product %}
+          <a href="{{ reviewed_product.url }}" class="designer-reviews__product-tag">
+            <span>Used in project: <strong>{{ reviewed_product.title }}</strong></span>
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .designer-reviews__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent, #A67C52);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .designer-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .designer-reviews__card {
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    padding: 28px;
+    border-radius: var(--card-corner-radius, 8px);
+    border: 1px solid var(--color-border, #E5E0D8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .designer-reviews__stars {
+    color: var(--color-accent, #A67C52);
+    font-size: 1rem;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .designer-reviews__quote {
+    font-family: var(--font-heading-family);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: #1C1C1A;
+    margin: 0 0 20px 0;
+    font-style: italic;
+  }
+  .designer-reviews__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .designer-reviews__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .designer-reviews__name {
+    display: block;
+    font-size: 0.9rem;
+    color: #1C1C1A;
+  }
+  .designer-reviews__title {
+    font-size: 0.8rem;
+    color: #6E6D68;
+  }
+  .designer-reviews__product-tag {
+    display: block;
+    padding-top: 12px;
+    border-top: 1px dashed var(--color-border, #E5E0D8);
+    font-size: 0.8rem;
+    color: var(--color-accent, #A67C52);
+    text-decoration: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Designer Reviews",
+  "tag": "section",
+  "class": "designer-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Endorsed By Leading Architects"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "PROFESSIONAL REVIEWS"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Architect Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Review Quote",
+          "default": "The organic wood finishes and minimal proportions fit perfectly in our Scandinavian villa projects."
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Architect Photo"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Architect Name",
+          "default": "Elena Lindqvist"
+        },
+        {
+          "type": "text",
+          "id": "author_title",
+          "label": "Firm / Studio",
+          "default": "Lead Architect at Studio Nord"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Featured Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Designer Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "author_name": "Elena Lindqvist", "author_title": "Lead Architect, Studio Nord" } },
+        { "type": "review", "settings": { "author_name": "Kenji Sato", "author_title": "Interior Designer, Tokyo Form" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

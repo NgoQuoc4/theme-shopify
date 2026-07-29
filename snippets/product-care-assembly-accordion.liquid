@@ -1,0 +1,101 @@
+{% comment %}
+  Product Material Care & Assembly Guide Accordions for PDP
+{% endcomment %}
+
+<div class="furniture-accordions">
+  <details class="furniture-accordion">
+    <summary class="furniture-accordion__summary">
+      <span class="furniture-accordion__title">Material & Care Instructions</span>
+      <span class="furniture-accordion__icon">+</span>
+    </summary>
+    <div class="furniture-accordion__content">
+      <p><strong>Solid Wood Care:</strong> Dust regularly with a soft, dry micro-fiber cloth. Avoid placing direct heat or liquids on untreated surfaces. Apply organic teak/walnut oil once every 6 months to maintain timber lustre.</p>
+      <p><strong>Upholstery & Bouclé Fabric:</strong> Vacuum weekly with a soft brush attachment. Blot spills immediately with a clean dry cloth. Do not rub.</p>
+    </div>
+  </details>
+
+  <details class="furniture-accordion">
+    <summary class="furniture-accordion__summary">
+      <span class="furniture-accordion__title">Assembly Guide & PDF Download</span>
+      <span class="furniture-accordion__icon">+</span>
+    </summary>
+    <div class="furniture-accordion__content">
+      <p>This furniture item is designed for effortless assembly. Estimated assembly time: 15–20 minutes. All hardware and tools are included in the package.</p>
+      <a href="#" class="furniture-accordion__download-btn" onclick="alert('Demo Assembly Manual PDF Download'); return false;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Assembly Manual (PDF)
+      </a>
+    </div>
+  </details>
+
+  <details class="furniture-accordion">
+    <summary class="furniture-accordion__summary">
+      <span class="furniture-accordion__title">White-Glove Delivery & Returns</span>
+      <span class="furniture-accordion__icon">+</span>
+    </summary>
+    <div class="furniture-accordion__content">
+      <p>We provide White-Glove delivery service for all bulky furniture items. Our logistics team will unbox, place in your room of choice, and assemble the item upon delivery. 30-day hassle-free returns guaranteed.</p>
+    </div>
+  </details>
+</div>
+
+{% stylesheet %}
+  .furniture-accordions {
+    margin-block: 20px;
+    border-top: 1px solid var(--color-border, #E5E0D8);
+  }
+  .furniture-accordion {
+    border-bottom: 1px solid var(--color-border, #E5E0D8);
+  }
+  .furniture-accordion__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #1C1C1A;
+    list-style: none;
+  }
+  .furniture-accordion__summary::-webkit-details-marker {
+    display: none;
+  }
+  .furniture-accordion[open] .furniture-accordion__icon {
+    transform: rotate(45deg);
+  }
+  .furniture-accordion__icon {
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    color: var(--color-accent, #A67C52);
+  }
+  .furniture-accordion__content {
+    padding-bottom: 16px;
+    font-size: 0.88rem;
+    color: #6E6D68;
+    line-height: 1.5;
+  }
+  .furniture-accordion__download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: var(--color-bg-secondary, #F3EFEA);
+    border: 1px solid var(--color-border, #E5E0D8);
+    border-radius: 4px;
+    color: #1C1C1A;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.82rem;
+  }
+  .furniture-accordion__download-btn:hover {
+    background: #1C1C1A;
+    color: #FBF9F5;
+  }
+{% endstylesheet %}

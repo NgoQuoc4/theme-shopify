@@ -1,0 +1,59 @@
+{% doc %}
+  Renders a Free Shipping Progress Bar for Cart Drawer or Cart Page.
+  Threshold can be configured or defaults to $500 (50000 cents) for Furniture delivery threshold.
+{% enddoc %}
+
+{% comment %} Free shipping threshold set to 50000 cents ($500.00) {% endcomment %}
+{% liquid
+  assign free_shipping_threshold = 50000
+  assign current_subtotal = cart.total_price
+  assign amount_remaining = free_shipping_threshold | minus: current_subtotal
+  assign progress_percent = current_subtotal | times: 100.0 | divided_by: free_shipping_threshold
+  if progress_percent > 100
+    assign progress_percent = 100
+  endif
+%}
+
+<div class="free-shipping-bar">
+  <div class="free-shipping-bar__message">
+    {% if amount_remaining > 0 %}
+      <span>Add <strong>{{ amount_remaining | money }}</strong> more for <strong>Free Delivery & Installation</strong>!</span>
+    {% else %}
+      <span class="free-shipping-bar__success">🎉 Congratulations! You unlocked <strong>Free White-Glove Delivery & Installation</strong>!</span>
+    {% endif %}
+  </div>
+  <div class="free-shipping-bar__progress-track">
+    <div class="free-shipping-bar__progress-fill" style="width: {{ progress_percent }}%;"></div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .free-shipping-bar {
+    padding: 12px 24px;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    border-bottom: 1px solid var(--color-border, #E5E0D8);
+    font-size: 0.85rem;
+    color: var(--color-text-main, #1C1C1A);
+  }
+  .free-shipping-bar__message {
+    text-align: center;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .free-shipping-bar__success {
+    color: #2E7D32;
+    font-weight: 600;
+  }
+  .free-shipping-bar__progress-track {
+    height: 6px;
+    background-color: var(--color-border, #E5E0D8);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .free-shipping-bar__progress-fill {
+    height: 100%;
+    background-color: var(--color-accent, #A67C52);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+{% endstylesheet %}

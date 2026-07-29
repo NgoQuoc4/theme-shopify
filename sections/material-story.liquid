@@ -1,0 +1,173 @@
+{% comment %}
+  Craftsmanship & Material Story Section - Japandi Furniture Theme
+  Displays sustainable wood finishes, premium upholstery fabrics, and artisan details.
+{% endcomment %}
+
+<div class="material-story section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="material-story__inner">
+    <div class="material-story__content">
+      {% if section.settings.subheading != blank %}
+        <span class="material-story__subheading caption-text">{{ section.settings.subheading | escape }}</span>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="material-story__title h2">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <div class="material-story__desc rte">{{ section.settings.description }}</div>
+      {% endif %}
+
+      <div class="material-story__features">
+        {% for block in section.blocks %}
+          <div class="material-story__feature-item" {{ block.shopify_attributes }}>
+            <h3 class="material-story__feature-title">{{ block.settings.title }}</h3>
+            <p class="material-story__feature-text">{{ block.settings.text }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="material-story__media">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'material-story__image', alt: section.settings.heading }}
+      {% else %}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'material-story__image material-story__placeholder' }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .material-story__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media screen and (max-width: 989px) {
+    .material-story__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+  .material-story__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent, #A67C52);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .material-story__title {
+    font-family: var(--font-heading-family);
+    color: #1C1C1A;
+    margin-bottom: 1rem;
+  }
+  .material-story__desc {
+    color: #6E6D68;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .material-story__features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .material-story__feature-item {
+    border-left: 2px solid var(--color-accent, #A67C52);
+    padding-left: 14px;
+  }
+  .material-story__feature-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #1C1C1A;
+  }
+  .material-story__feature-text {
+    font-size: 0.85rem;
+    color: #6E6D68;
+    margin: 0;
+    line-height: 1.4;
+  }
+  .material-story__media {
+    border-radius: var(--card-corner-radius, 8px);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  .material-story__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Craftsmanship & Story",
+  "tag": "section",
+  "class": "material-story-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sustainable Solid Wood & Artistry"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "JAPANDI CRAFTSMANSHIP"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Every furniture piece is hand-finished by master artisans using FSC®-certified European Solid Oak and Walnut wood, treated with natural organic oil finishes.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Feature Image"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Story Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "FSC® Solid Oak"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Description",
+          "default": "Sustainably harvested from protected European forests."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Craftsmanship & Story",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "FSC® Solid Oak", "text": "Sustainably harvested from protected forests." } },
+        { "type": "feature", "settings": { "title": "Textured Bouclé", "text": "Martindale rating over 40,000 rubs for durability." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

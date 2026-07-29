@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizon Furniture - Japandi Theme Documentation</title>
+  <style>
+    :root {
+      --bg-primary: #FBF9F5;
+      --bg-secondary: #F3EFEA;
+      --text-main: #1C1C1A;
+      --accent: #A67C52;
+      --border: #E5E0D8;
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .header {
+      background-color: #1C1C1A;
+      color: #FBF9F5;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      margin: 0;
+      color: #A67C52;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+      background: var(--bg-secondary);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: var(--accent);
+    }
+
+    .content section {
+      margin-bottom: 50px;
+      background: #FFFFFF;
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .content h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+    }
+
+    .code-block {
+      background: #1C1C1A;
+      color: #FBF9F5;
+      padding: 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: var(--bg-secondary);
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .feature-card h4 {
+      margin: 0 0 6px 0;
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 30px;
+      background: #1C1C1A;
+      color: #6E6D68;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>Horizon Furniture Japandi Theme</h1>
+    <p>ThemeForest User & Setup Documentation v1.0.0</p>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="#overview">1. Theme Overview</a></li>
+        <li><a href="#installation">2. Installation</a></li>
+        <li><a href="#cli-setup">3. Shopify CLI Development</a></li>
+        <li><a href="#features">4. Key Furniture Features</a></li>
+        <li><a href="#customizer">5. Theme Customize Admin</a></li>
+        <li><a href="#support">6. Customer Support</a></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <section id="overview">
+        <h2>1. Theme Overview</h2>
+        <p>Welcome to <strong>Horizon Furniture Japandi Edition</strong>, a luxury Shopify OS 2.0 theme crafted specifically for modern Furniture, Decor, and Architectural brands. Built on top of Shopify's high-performance OS 2.0 architecture, this theme is 100% redesigned with clean Scandinavian & Japandi aesthetics.</p>
+      </section>
+
+      <section id="installation">
+        <h2>2. Installation Guide</h2>
+        <ol>
+          <li>Log into your <strong>Shopify Admin</strong> panel.</li>
+          <li>Navigate to <strong>Online Store</strong> &rarr; <strong>Themes</strong>.</li>
+          <li>Click <strong>Add Theme</strong> &rarr; <strong>Upload zip file</strong>.</li>
+          <li>Select the <code>horizon-furniture-theme.zip</code> file provided in your download package.</li>
+          <li>Click <strong>Publish</strong> once uploaded.</li>
+        </ol>
+      </section>
+
+      <section id="cli-setup">
+        <h2>3. Shopify CLI Development Setup</h2>
+        <p>If you are a developer modifying theme files locally, use Shopify CLI:</p>
+        <div class="code-block">
+          # Install dependencies<br>
+          npm install<br><br>
+          # Start local dev server with hot reload<br>
+          npm run dev -- --store your-store-name.myshopify.com<br><br>
+          # Run Theme Check linter<br>
+          npm run check
+        </div>
+      </section>
+
+      <section id="features">
+        <h2>4. Key Furniture Features Included</h2>
+        <div class="feature-list">
+          <div class="feature-card">
+            <h4>Shoppable Lookbook</h4>
+            <p>Dynamic hotspot pins over room staging images with product popovers.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Category Bento Grid</h4>
+            <p>Architectural bento box layout for room collections.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Room Bundle Builder</h4>
+            <p>Curated room set combo discount builder with 1-click add all to cart.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Before/After Slider</h4>
+            <p>Interactive slider comparing timber finishes or staging transformations.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Cart Free Shipping Bar</h4>
+            <p>Dynamic progress bar calculating White-Glove delivery thresholds.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Product Spec Sheet</h4>
+            <p>Detailed W × D × H dimensions and FSC® material certificates on PDP.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="customizer">
+        <h2>5. Customizing Colors & Typography</h2>
+        <p>Go to <strong>Theme Settings</strong> in Shopify Admin to adjust:</p>
+        <ul>
+          <li><strong>Color Tokens:</strong> Warm Cream (<code>#FBF9F5</code>), Soft Sand (<code>#F3EFEA</code>), Terracotta (<code>#A67C52</code>).</li>
+          <li><strong>Typography:</strong> Heading font <em>Cormorant Garamond</em> and body font <em>Inter</em>.</li>
+          <li><strong>Corner Radii:</strong> Default 6px for buttons/inputs, 8px for product cards.</li>
+        </ul>
+      </section>
+
+      <section id="support">
+        <h2>6. Customer Support</h2>
+        <p>Need assistance or custom modification? Contact our support team via ThemeForest or email <a href="mailto:support@ngoquoc.com">support@ngoquoc.com</a>.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    &copy; 2026 Horizon Furniture Theme by NgoQuoc Studio. All Rights Reserved.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% comment %}
+  Furniture White-Glove Shipping & Assembly Notice for PDP
+{% endcomment %}
+
+<div class="furniture-shipping-notice">
+  <div class="furniture-shipping-notice__icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M1 3h15v13H1z"/>
+      <path d="M16 8h4l3 3v5h-7V8z"/>
+      <circle cx="5.5" cy="18.5" r="2.5"/>
+      <circle cx="18.5" cy="18.5" r="2.5"/>
+    </svg>
+  </div>
+  <div class="furniture-shipping-notice__content">
+    <strong class="furniture-shipping-notice__title">White-Glove Delivery & In-Room Assembly</strong>
+    <p class="furniture-shipping-notice__desc">Bulky furniture items are delivered directly into your room of choice, unboxed, and fully assembled by our expert team.</p>
+  </div>
+</div>
+
+{% stylesheet %}
+  .furniture-shipping-notice {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    border: 1px solid var(--color-border, #E5E0D8);
+    border-radius: 6px;
+    margin-block: 16px;
+  }
+  .furniture-shipping-notice__icon {
+    color: var(--color-accent, #A67C52);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .furniture-shipping-notice__title {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1C1C1A;
+    margin-bottom: 2px;
+  }
+  .furniture-shipping-notice__desc {
+    font-size: 0.82rem;
+    color: #6E6D68;
+    margin: 0;
+    line-height: 1.4;
+  }
+{% endstylesheet %}

@@ -1,0 +1,143 @@
+{%- doc -%}
+  Product card layout styles for Japandi & Architectural Furniture.
+{%- enddoc -%}
+
+{% stylesheet %}
+  .product-grid__card.product-grid__card {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--product-card-gap, 10px);
+    align-items: var(--product-card-alignment, flex-start);
+    text-decoration: none;
+    color: var(--color, var(--color-foreground));
+    padding-block: var(--padding-block-start, 0px) var(--padding-block-end, 16px);
+    padding-inline: var(--padding-inline-start, 0px) var(--padding-inline-end, 0px);
+    overflow: hidden;
+    border-radius: var(--card-corner-radius, 8px);
+    background-color: var(--color-card-bg, #FFFFFF);
+    border: 1px solid var(--color-border, #E5E0D8);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  }
+
+  .product-card:hover .product-grid__card {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(28, 28, 26, 0.08);
+    border-color: var(--color-accent, #A67C52);
+  }
+
+  .product-grid__card .group-block > * {
+    @media screen and (max-width: 749px) {
+      flex-direction: column;
+    }
+  }
+
+  :is(.product-grid__item, .resource-list__item) .product-card {
+    display: grid;
+    height: 100%;
+  }
+
+  /* Product Title Typography */
+  .product-card :is(h3, .h3, h4, .h4) {
+    font-family: var(--font-heading-family);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    margin: 0;
+    color: #1C1C1A;
+    transition: color 0.2s ease;
+  }
+
+  .product-card:hover :is(h3, .h3, h4, .h4) {
+    color: var(--color-accent, #A67C52);
+  }
+
+  /* Discount percentage badge */
+  .product-card__badge-discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--color-accent, #A67C52);
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    z-index: 4;
+  }
+
+  /* Material Swatches Preview Indicators */
+  .product-card__swatches-preview {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .product-card__swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    display: inline-block;
+  }
+  .product-card__swatch-dot--oak { background-color: #D4B692; }
+  .product-card__swatch-dot--walnut { background-color: #5C4033; }
+  .product-card__swatch-dot--boucle { background-color: #F3EFEA; }
+  .product-card__swatch-dot--charcoal { background-color: #2B2B2B; }
+
+  /* Japandi Quick Action Floating Bar */
+  .product-card__quick-actions {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+  }
+
+  .product-card:hover .product-card__quick-actions {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .product-card__action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    height: 32px;
+    padding-inline: 12px;
+    border-radius: 999px;
+    background: transparent;
+    border: none;
+    color: #1C1C1A;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .product-card__action-btn:hover {
+    background-color: #1C1C1A;
+    color: #FBF9F5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-card__quick-actions {
+      display: none;
+    }
+  }
+{% endstylesheet %}

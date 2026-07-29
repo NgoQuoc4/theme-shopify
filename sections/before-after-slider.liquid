@@ -1,0 +1,195 @@
+{% comment %}
+  Before / After Comparison Slider Section - Japandi & Interior Design
+  Allows comparing two images (e.g. Raw Wood vs Finished Oil, Staging Before vs After) with a draggable slider.
+{% endcomment %}
+
+<div class="before-after section section--{{ section.settings.section_width }} spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+  <div class="before-after__header text-{{ section.settings.heading_alignment }}">
+    {% if section.settings.subheading != blank %}
+      <span class="before-after__subheading caption-text">{{ section.settings.subheading | escape }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="before-after__title h2">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="before-after__container" id="before-after-{{ section.id }}">
+    <div class="before-after__image-wrapper before-after__image-after">
+      {% if section.settings.image_after != blank %}
+        {{ section.settings.image_after | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'before-after__image', alt: 'After image' }}
+      {% else %}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'before-after__image' }}
+      {% endif %}
+      <span class="before-after__label label--after">{{ section.settings.label_after | default: "Oiled Finish" }}</span>
+    </div>
+
+    <div class="before-after__image-wrapper before-after__image-before" style="clip-path: inset(0 50% 0 0);">
+      {% if section.settings.image_before != blank %}
+        {{ section.settings.image_before | image_url: width: 1600 | image_tag: loading: 'lazy', class: 'before-after__image', alt: 'Before image' }}
+      {% else %}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'before-after__image' }}
+      {% endif %}
+      <span class="before-after__label label--before">{{ section.settings.label_before | default: "Raw Timber" }}</span>
+    </div>
+
+    <input type="range" min="0" max="100" value="50" class="before-after__slider-input" aria-label="Before and after comparison slider" oninput="this.previousElementSibling.style.clipPath = 'inset(0 ' + (100 - this.value) + '% 0 0)'">
+    <div class="before-after__handle" style="left: 50%;">
+      <span class="before-after__handle-icon">&leftrightarrow;</span>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .before-after__subheading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent, #A67C52);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .before-after__container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--card-corner-radius, 8px);
+    overflow: hidden;
+  }
+  @media screen and (max-width: 749px) {
+    .before-after__container {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  .before-after__image-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .before-after__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .before-after__label {
+    position: absolute;
+    top: 20px;
+    padding: 6px 14px;
+    background: rgba(28, 28, 26, 0.75);
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+  .label--before { left: 20px; }
+  .label--after { right: 20px; }
+  .before-after__slider-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 5;
+  }
+  .before-after__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #FFFFFF;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 4;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+  .before-after__handle-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #1C1C1A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Before / After Slider",
+  "tag": "section",
+  "class": "before-after-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Raw Wood vs Artisan Oil Finish"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "MATERIAL TRANSFORMATION"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before Image (Raw)"
+    },
+    {
+      "type": "text",
+      "id": "label_before",
+      "label": "Before Label",
+      "default": "Raw Timber"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After Image (Finished)"
+    },
+    {
+      "type": "text",
+      "id": "label_after",
+      "label": "After Label",
+      "default": "Organic Oiled Finish"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section Width",
+      "options": [
+        { "value": "page-width", "label": "Page Width" },
+        { "value": "full-width", "label": "Full Width" }
+      ],
+      "default": "page-width"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before / After Slider"
+    }
+  ]
+}
+{% endschema %}

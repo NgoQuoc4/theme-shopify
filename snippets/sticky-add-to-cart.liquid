@@ -1,0 +1,99 @@
+{% comment %}
+  Sticky Add to Cart Bar Component for PDP
+  Appears at bottom of viewport on Product Detail Page to boost conversion rate.
+{% endcomment %}
+
+{% stylesheet %}
+  .sticky-add-to-cart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-border, #E5E0D8);
+    padding-block: 10px;
+    z-index: 99;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .sticky-add-to-cart.is-visible {
+    transform: translateY(0);
+  }
+  .sticky-add-to-cart__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .sticky-add-to-cart__product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sticky-add-to-cart__thumb {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .sticky-add-to-cart__title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+    color: #1C1C1A;
+  }
+  .sticky-add-to-cart__price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent, #A67C52);
+  }
+  .sticky-add-to-cart__btn {
+    padding: 10px 24px;
+    font-size: 0.88rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+{% endstylesheet %}
+
+{% if template.name == 'product' and product.available %}
+  {% comment %} theme-check-disable ValidScopedCSSClass {% endcomment %}
+  <div class="sticky-add-to-cart" id="sticky-add-to-cart-bar">
+    <div class="sticky-add-to-cart__inner page-width">
+      <div class="sticky-add-to-cart__product">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 100 }}" alt="{{ product.title | escape }}" class="sticky-add-to-cart__thumb" width="48" height="48">
+        {% endif %}
+        <div class="sticky-add-to-cart__details">
+          <h4 class="sticky-add-to-cart__title">{{ product.title }}</h4>
+          <span class="sticky-add-to-cart__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+        </div>
+      </div>
+
+      <div class="sticky-add-to-cart__actions">
+        {% form 'product', product, id: 'sticky-atc-form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="sticky-add-to-cart__btn button button--primary">
+            Add to Cart &bull; {{ product.selected_or_first_available_variant.price | money }}
+          </button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const stickyBar = document.getElementById('sticky-add-to-cart-bar');
+      if (!stickyBar) return;
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+          stickyBar.classList.add('is-visible');
+        } else {
+          stickyBar.classList.remove('is-visible');
+        }
+      });
+    });
+  </script>
+{% endif %}

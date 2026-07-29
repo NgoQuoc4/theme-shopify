@@ -1,0 +1,284 @@
+{% comment %}
+  Custom Header Navigation & Mega Menu Renderer
+{% endcomment %}
+
+{% comment %} theme-check-disable ValidScopedCSSClass {% endcomment %}
+
+<ul class="custom-nav__list">
+  {% for link in linklists[menu].links %}
+    {% assign has_mega_menu = false %}
+    {% assign matched_block = null %}
+
+    {% for block in blocks %}
+      {% assign parent_handle = block.settings.parent_menu_title | downcase | strip %}
+      {% assign link_title = link.title | downcase | strip %}
+      {% if parent_handle == link_title %}
+        {% assign has_mega_menu = true %}
+        {% assign matched_block = block %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    <li class="custom-nav__item{% if link.links != blank or has_mega_menu %} custom-nav__item--has-dropdown{% endif %}">
+      <a href="{{ link.url }}" class="custom-nav__link">
+        {{ link.title }}
+        {% if link.links != blank or has_mega_menu %}
+          <span class="custom-nav__arrow">&darr;</span>
+        {% endif %}
+      </a>
+
+      {% if has_mega_menu and matched_block != null %}
+        <div class="custom-mega-menu custom-mega-menu--{{ matched_block.type }}">
+          <div class="custom-mega-menu__inner page-width">
+            {% if matched_block.type == 'mega_menu_promo' %}
+              <div class="custom-mega-menu__columns">
+                {% for child_link in link.links %}
+                  <div class="custom-mega-menu__col">
+                    <strong class="custom-mega-menu__col-title">{{ child_link.title }}</strong>
+                    <ul class="custom-mega-menu__sublinks">
+                      {% for grand_child in child_link.links %}
+                        <li><a href="{{ grand_child.url }}">{{ grand_child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endfor %}
+              </div>
+
+              <div class="custom-mega-menu__promos">
+                {% if matched_block.settings.promo_image_1 != blank %}
+                  <a href="{{ matched_block.settings.promo_link_1 }}" class="custom-mega-menu__promo-card">
+                    {{ matched_block.settings.promo_image_1 | image_url: width: 400 | image_tag: loading: 'lazy', class: 'custom-mega-menu__promo-img', alt: matched_block.settings.promo_heading_1 }}
+                    <span class="custom-mega-menu__promo-title">{{ matched_block.settings.promo_heading_1 }}</span>
+                  </a>
+                {% endif %}
+                {% if matched_block.settings.promo_image_2 != blank %}
+                  <a href="{{ matched_block.settings.promo_link_2 }}" class="custom-mega-menu__promo-card">
+                    {{ matched_block.settings.promo_image_2 | image_url: width: 400 | image_tag: loading: 'lazy', class: 'custom-mega-menu__promo-img', alt: matched_block.settings.promo_heading_2 }}
+                    <span class="custom-mega-menu__promo-title">{{ matched_block.settings.promo_heading_2 }}</span>
+                  </a>
+                {% endif %}
+              </div>
+
+            {% elsif matched_block.type == 'mega_menu_products' %}
+              {% assign feat_collection = matched_block.settings.featured_collection %}
+              <div class="custom-mega-menu__products-wrapper">
+                <div class="custom-mega-menu__col">
+                  <strong class="custom-mega-menu__col-title">{{ link.title }} Collections</strong>
+                  <ul class="custom-mega-menu__sublinks">
+                    {% for child_link in link.links %}
+                      <li><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+
+                <div class="custom-mega-menu__product-grid">
+                  {% for product in feat_collection.products limit: 3 %}
+                    <div class="custom-mega-menu__product-item">
+                      <a href="{{ product.url }}" class="custom-mega-menu__product-link">
+                        {% if product.featured_image %}
+                          <img src="{{ product.featured_image | image_url: width: 250 }}" alt="{{ product.title | escape }}" loading="lazy" width="120" height="120" class="custom-mega-menu__product-img">
+                        {% endif %}
+                        <span class="custom-mega-menu__product-title">{{ product.title }}</span>
+                        <span class="custom-mega-menu__product-price">{{ product.price | money }}</span>
+                      </a>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% elsif link.links != blank %}
+        <ul class="custom-dropdown">
+          {% for child_link in link.links %}
+            <li><a href="{{ child_link.url }}" class="custom-dropdown__link">{{ child_link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+
+{% stylesheet %}
+  .custom-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .custom-nav__item {
+    position: relative;
+  }
+  .custom-nav__link {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #1C1C1A;
+    text-decoration: none;
+    padding-block: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s ease;
+  }
+  .custom-nav__link:hover {
+    color: var(--color-accent, #A67C52);
+  }
+  .custom-nav__arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+  }
+  .custom-nav__item:hover .custom-nav__arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Standard Dropdown */
+  .custom-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 220px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 12px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease;
+    z-index: 100;
+  }
+  .custom-nav__item:hover .custom-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .custom-dropdown__link {
+    display: block;
+    padding: 8px 20px;
+    font-size: 0.88rem;
+    color: #1C1C1A;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .custom-dropdown__link:hover {
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    color: var(--color-accent, #A67C52);
+  }
+
+  /* Mega Menu Layout */
+  .custom-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 100vw;
+    background: #FFFFFF;
+    border-top: 1px solid var(--color-border, #E5E0D8);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    padding-block: 36px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 100;
+  }
+  .custom-nav__item:hover .custom-mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .custom-mega-menu__inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+  }
+  .custom-mega-menu__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 24px;
+  }
+  .custom-mega-menu__col-title {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent, #A67C52);
+    margin-bottom: 12px;
+  }
+  .custom-mega-menu__sublinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .custom-mega-menu__sublinks li {
+    margin-bottom: 8px;
+  }
+  .custom-mega-menu__sublinks a {
+    font-size: 0.88rem;
+    color: #1C1C1A;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .custom-mega-menu__sublinks a:hover {
+    color: var(--color-accent, #A67C52);
+  }
+  .custom-mega-menu__promos {
+    display: flex;
+    gap: 16px;
+  }
+  .custom-mega-menu__promo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    color: #1C1C1A;
+  }
+  .custom-mega-menu__promo-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  .custom-mega-menu__promo-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .custom-mega-menu__products-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 32px;
+    width: 100%;
+  }
+  .custom-mega-menu__product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .custom-mega-menu__product-item {
+    background-color: var(--color-bg-secondary, #F3EFEA);
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+  }
+  .custom-mega-menu__product-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .custom-mega-menu__product-title {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1C1C1A;
+  }
+  .custom-mega-menu__product-price {
+    font-size: 0.8rem;
+    color: var(--color-accent, #A67C52);
+    font-weight: 600;
+  }
+{% endstylesheet %}
