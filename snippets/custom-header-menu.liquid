@@ -90,7 +90,7 @@
                 {% for col in matched_block.settings.featured_collections %}
                   <a href="{{ col.url }}" class="custom-mega-menu__cat-card">
                     {% if col.featured_image %}
-                      <img src="{{ col.featured_image | image_url: width: 300 }}" alt="{{ col.title | escape }}" loading="lazy" class="custom-mega-menu__cat-img">
+                      <img src="{{ col.featured_image | image_url: width: 300 }}" alt="{{ col.title | escape }}" loading="lazy" width="300" height="225" class="custom-mega-menu__cat-img">
                     {% endif %}
                     <span class="custom-mega-menu__cat-title">{{ col.title }} &rarr;</span>
                   </a>
