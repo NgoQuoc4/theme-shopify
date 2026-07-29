@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_jVaWmY": {
@@ -8,8 +17,26 @@
           "name": "t:names.heading",
           "settings": {
             "text": "<p>Japandi & Scandinavian Furniture Series</p>",
-            "text_color": "{{ settings.color_palette.background }}"
-          }
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -23,6 +50,7 @@
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
         "media_type_2_mobile": "image",
+        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -48,50 +76,159 @@
     },
     "circle_collections_main": {
       "type": "collection-circle-slider",
+      "blocks": {
+        "b1": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Sale Items",
+            "link": "",
+            "collection": "",
+            "is_highlight": true,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b2": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Press Tables",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b3": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Lighting",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b4": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Spoke Sofa",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b5": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Storage",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b6": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Turn Chairs",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b7": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Accessories",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        },
+        "b8": {
+          "type": "collection_bubble",
+          "settings": {
+            "title": "Tables",
+            "link": "",
+            "collection": "",
+            "is_highlight": false,
+            "highlight_label": "Sale",
+            "bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ],
       "settings": {
         "heading": "Explore Categories",
         "heading_alignment": "left",
         "section_width": "page-width"
-      },
-      "blocks": {
-        "b1": { "type": "collection_bubble", "settings": { "title": "Sale Items", "is_highlight": true } },
-        "b2": { "type": "collection_bubble", "settings": { "title": "Press Tables" } },
-        "b3": { "type": "collection_bubble", "settings": { "title": "Lighting" } },
-        "b4": { "type": "collection_bubble", "settings": { "title": "Spoke Sofa" } },
-        "b5": { "type": "collection_bubble", "settings": { "title": "Storage" } },
-        "b6": { "type": "collection_bubble", "settings": { "title": "Turn Chairs" } },
-        "b7": { "type": "collection_bubble", "settings": { "title": "Accessories" } },
-        "b8": { "type": "collection_bubble", "settings": { "title": "Tables" } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8"]
+      }
     },
     "custom_banner_slider_main": {
       "type": "custom-banner-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_url": "",
+            "overlay_opacity": 30,
+            "subheading": "Contemporary Grace",
+            "heading": "Dining & Kitchen",
+            "button_label": "Shop Collection",
+            "button_link": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "video_url": "",
+            "overlay_opacity": 30,
+            "subheading": "Minimalist Proportions",
+            "heading": "Living Room Sanctum",
+            "button_label": "Explore Living",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
       "settings": {
         "slides_per_view": 1,
         "card_radius": 16,
         "enable_autoplay": true,
         "autoplay_speed": 5,
-        "section_width": "page-width"
-      },
-      "blocks": {
-        "slide_1": { "type": "slide", "settings": { "heading": "Dining & Kitchen", "subheading": "Contemporary Grace", "button_label": "Shop Collection" } },
-        "slide_2": { "type": "slide", "settings": { "heading": "Living Room Sanctum", "subheading": "Minimalist Proportions", "button_label": "Explore Living" } }
-      },
-      "block_order": ["slide_1", "slide_2"]
+        "section_width": "wide"
+      }
     },
     "category_bento_main": {
       "type": "category-bento",
-      "settings": {
-        "heading": "Explore By Living Space",
-        "subheading": "CURATED CATEGORIES",
-        "heading_alignment": "center",
-        "section_width": "page-width"
-      },
       "blocks": {
         "card_1": {
           "type": "category_card",
           "settings": {
+            "collection": "",
             "title": "Living Room Series",
             "card_size": "large"
           }
@@ -99,6 +236,7 @@
         "card_2": {
           "type": "category_card",
           "settings": {
+            "collection": "",
             "title": "Dining Room & Tables",
             "card_size": "wide"
           }
@@ -106,6 +244,7 @@
         "card_3": {
           "type": "category_card",
           "settings": {
+            "collection": "",
             "title": "Bedroom Sanctuary",
             "card_size": "standard"
           }
@@ -113,81 +252,243 @@
         "card_4": {
           "type": "category_card",
           "settings": {
+            "collection": "",
             "title": "Architectural Lighting",
             "card_size": "standard"
           }
         }
       },
-      "block_order": ["card_1", "card_2", "card_3", "card_4"]
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "heading": "Explore By Living Space",
+        "subheading": "CURATED CATEGORIES",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      }
     },
     "shoppable_lookbook_main": {
       "type": "shoppable-lookbook",
-      "settings": {
-        "heading": "Shop The Living Space",
-        "subheading": "INTERIOR LOOKBOOK",
-        "heading_alignment": "center",
-        "section_width": "page-width"
-      },
       "blocks": {
         "pin_1": {
           "type": "hotspot",
           "settings": {
+            "product": "",
             "pos_x": 35,
-            "pos_y": 45
+            "pos_y": 45,
+            "tooltip_position": "top"
           }
         },
         "pin_2": {
           "type": "hotspot",
           "settings": {
+            "product": "",
             "pos_x": 65,
-            "pos_y": 60
+            "pos_y": 60,
+            "tooltip_position": "top"
           }
         }
       },
-      "block_order": ["pin_1", "pin_2"]
+      "block_order": [
+        "pin_1",
+        "pin_2"
+      ],
+      "settings": {
+        "heading": "Shop The Living Space",
+        "subheading": "INTERIOR LOOKBOOK",
+        "heading_alignment": "center",
+        "section_width": "page-width"
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 16,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 12,
+        "background_color": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
     },
     "room_bundle_main": {
       "type": "room-bundle-builder",
+      "blocks": {
+        "item_1": {
+          "type": "bundle_item",
+          "settings": {
+            "product": ""
+          }
+        },
+        "item_2": {
+          "type": "bundle_item",
+          "settings": {
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2"
+      ],
       "settings": {
         "heading": "Complete The Dining Set",
         "subheading": "CURATED ROOM SET",
         "discount_percent": 10,
         "section_width": "page-width"
-      },
-      "blocks": {
-        "item_1": { "type": "bundle_item", "settings": {} },
-        "item_2": { "type": "bundle_item", "settings": {} }
-      },
-      "block_order": ["item_1", "item_2"]
+      }
     },
     "material_story_main": {
       "type": "material-story",
+      "blocks": {
+        "feat_1": {
+          "type": "feature",
+          "settings": {
+            "title": "FSC® Solid Oak",
+            "text": "Sustainably harvested from protected forests."
+          }
+        },
+        "feat_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Textured Bouclé",
+            "text": "Martindale rating over 40,000 rubs for durability."
+          }
+        }
+      },
+      "block_order": [
+        "feat_1",
+        "feat_2"
+      ],
       "settings": {
         "heading": "Sustainable Solid Wood & Artistry",
         "subheading": "JAPANDI CRAFTSMANSHIP",
         "description": "<p>Every furniture piece is hand-finished by master artisans using FSC®-certified European Solid Oak and Walnut wood.</p>",
         "section_width": "page-width"
-      },
-      "blocks": {
-        "feat_1": { "type": "feature", "settings": { "title": "FSC® Solid Oak", "text": "Sustainably harvested from protected forests." } },
-        "feat_2": { "type": "feature", "settings": { "title": "Textured Bouclé", "text": "Martindale rating over 40,000 rubs for durability." } }
-      },
-      "block_order": ["feat_1", "feat_2"]
+      }
     },
     "interactive_finish_picker_main": {
       "type": "interactive-finish-picker",
+      "blocks": {
+        "swatch_1": {
+          "type": "finish_card",
+          "settings": {
+            "category": "Solid Wood Finish",
+            "title": "European Natural Oak",
+            "description": "Finished with organic matte oil to preserve raw grain texture.",
+            "collection": ""
+          }
+        },
+        "swatch_2": {
+          "type": "finish_card",
+          "settings": {
+            "category": "Solid Wood Finish",
+            "title": "Smoked Walnut",
+            "description": "Finished with organic matte oil to preserve raw grain texture.",
+            "collection": ""
+          }
+        },
+        "swatch_3": {
+          "type": "finish_card",
+          "settings": {
+            "category": "Upholstery Fabric",
+            "title": "Textured Cream Bouclé",
+            "description": "Finished with organic matte oil to preserve raw grain texture.",
+            "collection": ""
+          }
+        },
+        "swatch_4": {
+          "type": "finish_card",
+          "settings": {
+            "category": "Upholstery Fabric",
+            "title": "Terracotta Linen",
+            "description": "Finished with organic matte oil to preserve raw grain texture.",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "swatch_1",
+        "swatch_2",
+        "swatch_3",
+        "swatch_4"
+      ],
       "settings": {
         "heading": "Explore Our Timber & Fabric Library",
         "subheading": "TACTILE MATERIAL SELECTION",
+        "text": "From FSC® Natural Oak to textured Bouclé and Italian Saddle Leather, discover the tactile materials that define our Japandi collection.",
         "section_width": "page-width"
-      },
-      "blocks": {
-        "swatch_1": { "type": "finish_card", "settings": { "title": "European Natural Oak", "category": "Solid Wood Finish" } },
-        "swatch_2": { "type": "finish_card", "settings": { "title": "Smoked Walnut", "category": "Solid Wood Finish" } },
-        "swatch_3": { "type": "finish_card", "settings": { "title": "Textured Cream Bouclé", "category": "Upholstery Fabric" } },
-        "swatch_4": { "type": "finish_card", "settings": { "title": "Terracotta Linen", "category": "Upholstery Fabric" } }
-      },
-      "block_order": ["swatch_1", "swatch_2", "swatch_3", "swatch_4"]
+      }
     },
     "furniture_guarantee_main": {
       "type": "furniture-guarantee",
@@ -208,40 +509,96 @@
     },
     "designer_testimonials_main": {
       "type": "designer-testimonials",
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "quote": "The organic wood finishes and minimal proportions fit perfectly in our Scandinavian villa projects.",
+            "author_name": "Elena Lindqvist",
+            "author_title": "Lead Architect, Studio Nord",
+            "product": ""
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "quote": "Exceptional craftsmanship and tactile fabrics that elevated our luxury residential staging.",
+            "author_name": "Kenji Sato",
+            "author_title": "Interior Designer, Tokyo Form",
+            "product": ""
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2"
+      ],
       "settings": {
         "heading": "Endorsed By Leading Architects",
         "subheading": "PROFESSIONAL REVIEWS",
         "heading_alignment": "center",
         "section_width": "page-width"
-      },
-      "blocks": {
-        "rev_1": { "type": "review", "settings": { "author_name": "Elena Lindqvist", "author_title": "Lead Architect, Studio Nord", "quote": "The organic wood finishes and minimal proportions fit perfectly in our Scandinavian villa projects." } },
-        "rev_2": { "type": "review", "settings": { "author_name": "Kenji Sato", "author_title": "Interior Designer, Tokyo Form", "quote": "Exceptional craftsmanship and tactile fabrics that elevated our luxury residential staging." } }
-      },
-      "block_order": ["rev_1", "rev_2"]
+      }
     },
     "instagram_grid_main": {
       "type": "instagram-grid",
+      "blocks": {
+        "p1": {
+          "type": "social_post",
+          "settings": {
+            "handle": "@japandihome",
+            "link": ""
+          }
+        },
+        "p2": {
+          "type": "social_post",
+          "settings": {
+            "handle": "@japandihome",
+            "link": ""
+          }
+        },
+        "p3": {
+          "type": "social_post",
+          "settings": {
+            "handle": "@japandihome",
+            "link": ""
+          }
+        },
+        "p4": {
+          "type": "social_post",
+          "settings": {
+            "handle": "@japandihome",
+            "link": ""
+          }
+        },
+        "p5": {
+          "type": "social_post",
+          "settings": {
+            "handle": "@japandihome",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
       "settings": {
         "heading": "Follow Us @JapandiHome",
         "subheading": "INTERIOR INSPIRATION",
         "heading_alignment": "center",
         "section_width": "page-width"
-      },
-      "blocks": {
-        "p1": { "type": "social_post", "settings": { "handle": "@japandihome" } },
-        "p2": { "type": "social_post", "settings": { "handle": "@japandihome" } },
-        "p3": { "type": "social_post", "settings": { "handle": "@japandihome" } },
-        "p4": { "type": "social_post", "settings": { "handle": "@japandihome" } },
-        "p5": { "type": "social_post", "settings": { "handle": "@japandihome" } }
-      },
-      "block_order": ["p1", "p2", "p3", "p4", "p5"]
+      }
     },
     "recently_viewed_main": {
       "type": "recently-viewed-products",
       "settings": {
         "heading": "Recently Viewed Pieces",
         "subheading": "YOUR BROWSING HISTORY",
+        "heading_alignment": "center",
         "max_products": 4,
         "section_width": "page-width"
       }
@@ -251,21 +608,7 @@
       "settings": {
         "heading": "Join The Interior Journal",
         "subheading": "EXCLUSIVE ACCESS & 10% OFF",
-        "section_width": "page-width"
-      }
-    },
-    "product_list_fa6P9H": {
-      "type": "product-list",
-      "name": "t:names.product_list",
-      "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 8,
-        "rows_gap": 24,
+        "text": "Subscribe to receive curated interior design lookbooks, new furniture collection drops, and $100 off your first white-glove order.",
         "section_width": "page-width"
       }
     }
